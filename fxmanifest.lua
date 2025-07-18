@@ -13,3 +13,9 @@ client_script {
 shared_script {
 '@ox_lib/init.lua',
 }
+
+files {
+    'index.html'
+}
+
+ui_page 'index.html'

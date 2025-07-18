@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <style>
+      body { 
+        margin:0; 
+        background: rgba(0,0,0,0.8); 
+        display:none; 
+        justify-content:center; 
+        align-items:center; 
+        height:100vh; 
+      }
+      
+      #container {
+        position: relative;
+        max-width: 90vw; 
+        max-height: 90vh;
+      }
+
+      #closeBtn { 
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 28px; 
+        color: white; 
+        cursor: pointer;
+        background: rgba(0,0,0,0.4);
+        padding: 3px 8px;
+        border-radius: 50%;
+        user-select: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <h1>Siemano kolano</h1>
+      <div id="button">✖</div>
+    </div>
+
+    <script>
+      window.addEventListener('message', function(event) {
+        if(event.data.action === 'openUI') {
+          console.log(event.data);
+          document.body.style.display = 'flex';
+        } else if(event.data.action === 'closeUI') {
+          document.body.style.display = 'none';
+        }
+      });
+      document.getElementById('button').onclick = function() {
+        fetch(`https://${GetParentResourceName()}/closeUI`, {method: 'POST'}).then(() => {
+          document.body.style.display = 'none';
+        });
+      };
+    </script>
+  </body>
+</html>
